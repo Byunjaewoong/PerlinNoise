@@ -17,7 +17,7 @@ class App {
         this.mode = 0;
 
         //perlin scale
-        this.scale = 0.1;
+        this.scale = 10;
 
 
         window.addEventListener("click", (e) => {
