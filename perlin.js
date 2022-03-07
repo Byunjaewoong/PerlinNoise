@@ -14,7 +14,7 @@ export class Perlin{
         this.dotAmount = this.scale;
         this.interval = Math.round(this.stageWidth/this.scale);
         for(let i=0;i<this.dotAmount;i++){
-            const dot = new Perlindot(this.interval*i,this.stageHeight/2+this.stageHeight/4*Math.random(-1,1),0)
+            const dot = new Perlindot(this.interval*i,this.stageHeight/2+this.stageHeight/4*(Calculate.getRandomArbitrary(-1,1)),0)
             this.perlinGroup.arry[i] = dot;
             console.log(this.perlinGroup.arry[i]);
         }
@@ -25,24 +25,39 @@ export class Perlin{
     }
 
     cubicInterPolate(a,b,c,d,x){
-        const P = (d.y-c.y)-(a.y-b.y);
-        const Q = (a.y-b.y)-P;
-        const R = c.y - a.y;
-        const S = b.y;
+        let P = (d.y-c.y)-(a.y-b.y);
+        let Q = (a.y-b.y)-P;
+        let R = c.y - a.y;
+        let S = b.y;
 
         return P*x*x*x + Q*x*x + R*x + S;
     }
 
     draw1Dperlin(){
         for(let i=0;i<this.stageWidth;i++){
-            let j = Math.round(i/this.scale);
-            /*if(this.perlinGroup.arry[j+1]&&this.perlinGroup.arry[j+2]**this.perlinGroup.arry[j+3]){
-                this.height = this.cubicInterPolate(this.perlinGroup.arry[j],this.perlinGroup.arry[j+1],this.perlinGroup.arry[j+2],this.perlinGroup.arry[j+3],i-j*this.interval);
-            }*/
-            this.height = this.stageHeight/2;
-            if(i==0){
-                console.log(this.height);
+            let j = Math.round(i/this.interval);
+            if(this.perlinGroup.arry[j+1]&&this.perlinGroup.arry[j+2]&&j>0){
+                this.height = this.cubicInterPolate(this.perlinGroup.arry[j-1],this.perlinGroup.arry[j],this.perlinGroup.arry[j+1],this.perlinGroup.arry[j+2],(i-j*this.interval)/this.interval);
             }
+            else if(j==0){
+                this.height = this.cubicInterPolate({x:0,y:this.height/2},this.perlinGroup.arry[j],this.perlinGroup.arry[j+1],this.perlinGroup.arry[j+2],(i-j*this.interval)/this.interval);
+            }
+            else if(j==(this.scale-2)){
+                this.height = this.cubicInterPolate(this.perlinGroup.arry[j-1],this.perlinGroup.arry[j],this.perlinGroup.arry[j+1],{x:0,y:this.height/2},(i-j*this.interval)/this.interval);
+            }
+            else if(j==(this.scale-1)){
+                this.height = this.cubicInterPolate(this.perlinGroup.arry[j-1],this.perlinGroup.arry[j],{x:0,y:this.height/2},{x:0,y:this.height/2},(i-j*this.interval)/this.interval);
+            }
+            else if(j==(this.scale)){
+                this.height = this.cubicInterPolate(this.perlinGroup.arry[j-1],{x:0,y:this.height/2},{x:0,y:this.height/2},{x:0,y:this.height/2},(i-j*this.interval)/this.interval);
+            }
+            else{
+                this.height = this.stageHeight/2;
+            }
+            //this.height = this.stageHeight/2;
+            //if(j>=2&&j<=3){
+            //    console.log(this.height+"    "+i);
+            //}
             this.ctx.fillStyle = "rgba(255,255,255,1)";
             this.ctx.beginPath();
             this.ctx.arc(

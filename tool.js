@@ -6,6 +6,10 @@ export class Calculate{
         return d;
     }
 
+    static getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
     static distanceLineToPoint(x3,y3,z3,x_polar,y_polar,z_polar){
             //벡터와 한 점의 최단거리 (외적을 통한 계산)  
     let expo_x = (y_polar*z3) - (z_polar*y3);
