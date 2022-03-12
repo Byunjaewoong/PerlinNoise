@@ -17,11 +17,12 @@ export class Perlin{
         //console.log(this.scale);
         //console.log(this.interval);
         for(let i=0;i<this.dotAmount;i++){
-            const dot = new Perlindot(this.interval*i,this.stageHeight/2+this.stageHeight/4*(Calculate.getRandomArbitrary(-1,1)),0)
+            const dot = new Perlindot(this.stageHeight,this.interval*i,0)
             this.perlinGroup.arry[i] = dot;
             //console.log(this.perlinGroup.arry[i]);
         }
-        this.perlinGroup.arry[this.dotAmount] = new Perlindot(this.interval*this.dotAmount,this.stageHeight/2+this.stageHeight/4*(Calculate.getRandomArbitrary(-1,1)),0);
+        this.perlinGroup.arry[this.dotAmount] = new Perlindot(this.stageHeight,this.interval*this.dotAmount,0);
+        this.perlinGroup.arry[this.dotAmount+1] = new Perlindot(this.stageHeight,this.interval*(this.dotAmount+1),0);
         
     }
 
@@ -45,16 +46,7 @@ export class Perlin{
                 this.height = this.cubicInterPolate(this.perlinGroup.arry[j-1],this.perlinGroup.arry[j],this.perlinGroup.arry[j+1],this.perlinGroup.arry[j+2],(i-j*this.interval)/this.interval);
             }
             else if(j==0){
-                this.height = this.cubicInterPolate({x:0,y:this.stageWidth/2},this.perlinGroup.arry[j],this.perlinGroup.arry[j+1],this.perlinGroup.arry[j+2],(i-j*this.interval)/this.interval);
-            }
-            else if(j==(this.scale-1)){
-                this.height = this.cubicInterPolate(this.perlinGroup.arry[j-1],this.perlinGroup.arry[j],this.perlinGroup.arry[j+1],{x:0,y:this.stageWidth/2},(i-j*this.interval)/this.interval);
-            }
-            else if(j==(this.scale)){
-                this.height = this.cubicInterPolate(this.perlinGroup.arry[j-1],this.perlinGroup.arry[j],{x:0,y:this.stageWidth/2},{x:0,y:this.stageWidth/2},(i-j*this.interval)/this.interval);
-            }
-            else{
-                this.height = this.stageHeight/2;
+                this.height = this.cubicInterPolate({x:0,y:this.stageHeight/2},this.perlinGroup.arry[j],this.perlinGroup.arry[j+1],this.perlinGroup.arry[j+2],(i-j*this.interval)/this.interval);
             }
 
             this.perlinGroup.allarry[i] = this.height;
@@ -63,6 +55,12 @@ export class Perlin{
     }
 
     draw1Dperlin(){
+        for(let i=0;i<this.perlinGroup.arry.length;i++){
+            this.perlinGroup.arry[i].update();
+        }
+        this.getallgroup();
+
+
         for(let i=0;i<this.stageWidth;i++){
             this.height = this.perlinGroup.allarry[i];
             //this.height = this.stageHeight/2;
@@ -89,10 +87,21 @@ export class Perlin{
 }
 
 export class Perlindot{
-    constructor(x,y,gradient){
+    constructor(stageHeight,x,gradient){
+        this.stageHeight = stageHeight;
         this.x = x;
-        this.y = y;
+        this.offset = Calculate.getRandomArbitrary(-1,1);
+        this.amp = this.stageHeight/4;
+        //this.y = this.stageHeight/2+this.amp*this.offset;
+        this.y = this.stageHeight/2;
         this.gradient = gradient;
+        this.speed = Calculate.getRandomArbitrary(-0.01,0.01);
+        this.cur = 0;
+    }
+
+    update(){
+        this.cur += this.speed;
+        this.y = this.y + this.offset*this.stageHeight/800*Math.cos(this.cur);
     }
 }
 

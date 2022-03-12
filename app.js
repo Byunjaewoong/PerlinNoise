@@ -44,6 +44,7 @@ class App {
         this.stageHeight = document.body.clientHeight;
         this.canvas.width = this.stageWidth * this.pixelRatio;
         this.canvas.height = this.stageHeight * this.pixelRatio;
+        this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
     }
 
     animate() {
