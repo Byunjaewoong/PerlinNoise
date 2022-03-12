@@ -101,7 +101,7 @@ export class Perlindot{
 
     update(){
         this.cur += this.speed;
-        this.y = this.y + this.offset*this.stageHeight/800*Math.cos(this.cur);
+        this.y = this.y + this.offset*this.stageHeight/1600*Math.cos(this.cur);
     }
 }
 
