@@ -69,15 +69,21 @@ export class Perlin{
             //if(j>=2&&j<=3){
             //    console.log(this.height+"    "+i);
             //}
-            this.ctx.fillStyle = "rgba(255,255,255,1)";
+            //this.ctx.fillStyle = "rgba(255,255,255,1)";
+            this.ctx.lineWidth = 4;
+            this.ctx.strokeStyle = "rgba(255,255,255,1)";
             this.ctx.beginPath();
+            this.ctx.moveTo(i, this.height);
+            this.ctx.quadraticCurveTo(i+0.5, (this.height+this.perlinGroup.allarry[i+1])/2, i+1, this.perlinGroup.allarry[i+1]);
+            this.ctx.stroke();
+            /*this.ctx.beginPath();
             this.ctx.arc(
                 i, //* ratio_w,
                 this.height, //* ratio_h,
                 2,
                 0 * 2/8 * Math.PI, 8 * 2/8 * Math.PI  
                 );
-            this.ctx.fill();
+            this.ctx.fill();*/
         }
     }
 }
