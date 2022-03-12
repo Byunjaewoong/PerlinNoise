@@ -17,7 +17,7 @@ class App {
         this.mode = 0;
 
         //perlin scale
-        this.scale = 10;
+        this.scale = 5;
 
 
         window.addEventListener("click", (e) => {
@@ -32,11 +32,11 @@ class App {
             }
             */
             this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
-
+            this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
         });
 
         this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
-        //this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+        this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
     }
 
     resize(){
@@ -45,13 +45,15 @@ class App {
         this.canvas.width = this.stageWidth * this.pixelRatio;
         this.canvas.height = this.stageHeight * this.pixelRatio;
         this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+        this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+
     }
 
     animate() {
         window.requestAnimationFrame(this.animate.bind(this));
         this.ctx.clearRect(0,0,this.stageWidth,this.stageHeight);
         this.perlin.draw1Dperlin();
-        //this.perlin2.draw1Dperlin();
+        this.perlin2.draw1Dperlin();
     }    
 }
 

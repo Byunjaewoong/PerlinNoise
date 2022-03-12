@@ -91,17 +91,17 @@ export class Perlindot{
         this.stageHeight = stageHeight;
         this.x = x;
         this.offset = Calculate.getRandomArbitrary(-1,1);
-        this.amp = this.stageHeight/4;
+        this.amp = this.stageHeight/400;
         //this.y = this.stageHeight/2+this.amp*this.offset;
         this.y = this.stageHeight/2;
         this.gradient = gradient;
-        this.speed = Calculate.getRandomArbitrary(-0.01,0.01);
+        this.speed = Calculate.getRandomArbitrary(-0.02,0.02);
         this.cur = 0;
     }
 
     update(){
         this.cur += this.speed;
-        this.y = this.y + this.offset*this.stageHeight/1600*Math.cos(this.cur);
+        this.y = this.y + this.offset*this.amp*Math.cos(this.cur);
     }
 }
 
