@@ -17,12 +17,12 @@ class App {
         this.mode = 0;
 
         //perlin scale
-        this.scale = 7;
+        this.scale = 10;
 
 
         window.addEventListener("click", (e) => {
             //mode 변경
-            if(this.mode == 0){
+            /*if(this.mode == 0){
                 this.mode += 1;
                 console.log(this.mode);
             }
@@ -30,10 +30,13 @@ class App {
                 this.mode = 0;
                 console.log(this.mode);
             }
-            
+            */
+            this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+
         });
 
         this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+        //this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
     }
 
     resize(){
@@ -47,6 +50,7 @@ class App {
         window.requestAnimationFrame(this.animate.bind(this));
         this.ctx.clearRect(0,0,this.stageWidth,this.stageHeight);
         this.perlin.draw1Dperlin();
+        //this.perlin2.draw1Dperlin();
     }    
 }
 
