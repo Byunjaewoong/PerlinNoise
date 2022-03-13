@@ -33,10 +33,13 @@ class App {
             */
             this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
             this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+            this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
         });
 
         this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
         this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+        this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+
     }
 
     resize(){
@@ -46,6 +49,8 @@ class App {
         this.canvas.height = this.stageHeight * this.pixelRatio;
         this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
         this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+        this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+
 
     }
 
@@ -54,6 +59,7 @@ class App {
         this.ctx.clearRect(0,0,this.stageWidth,this.stageHeight);
         this.perlin.draw1Dperlin();
         this.perlin2.draw1Dperlin();
+        this.perlin3.draw1Dperlin();
     }    
 }
 
