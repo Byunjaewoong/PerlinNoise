@@ -17,8 +17,10 @@ class App {
         this.mode = 0;
 
         //perlin scale
-        this.scale = 5;
+        this.scale = 10;
 
+        //wave speed
+        this.speed = 0.03;
 
         window.addEventListener("click", (e) => {
             //mode 변경
@@ -31,14 +33,14 @@ class App {
                 console.log(this.mode);
             }
             */
-            this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
-            this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
-            this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+            this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
+            this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
+            this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
         });
 
-        this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
-        this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
-        this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+        this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
+        this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
+        this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
 
     }
 
@@ -47,9 +49,9 @@ class App {
         this.stageHeight = document.body.clientHeight;
         this.canvas.width = this.stageWidth * this.pixelRatio;
         this.canvas.height = this.stageHeight * this.pixelRatio;
-        this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
-        this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
-        this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight);
+        this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
+        this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
+        this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
 
 
     }

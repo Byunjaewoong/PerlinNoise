@@ -1,28 +1,28 @@
 import {Calculate} from "./tool.js"
 
 export class Perlin{
-    constructor(canvas,scale,stageWidth,stageHeight){
+    constructor(canvas,scale,stageWidth,stageHeight,speed){
         this.ctx = canvas.getContext('2d');
         this.scale = scale;
         this.stageWidth = stageWidth;
         this.stageHeight = stageHeight;
         this.perlinGroup = new PerlinGroup;
-        this.get1DGrid();
+        this.get1DGrid(speed);
         this.getallgroup();
     }
 
-    get1DGrid(){
+    get1DGrid(speed){
         this.dotAmount = this.scale;
         this.interval = Math.round(this.stageWidth/this.scale);
         //console.log(this.scale);
         //console.log(this.interval);
         for(let i=0;i<this.dotAmount;i++){
-            const dot = new Perlindot(this.stageHeight,this.interval*i,0)
+            const dot = new Perlindot(this.stageHeight,this.interval*i,0,speed)
             this.perlinGroup.arry[i] = dot;
             //console.log(this.perlinGroup.arry[i]);
         }
-        this.perlinGroup.arry[this.dotAmount] = new Perlindot(this.stageHeight,this.interval*this.dotAmount,0);
-        this.perlinGroup.arry[this.dotAmount+1] = new Perlindot(this.stageHeight,this.interval*(this.dotAmount+1),0);
+        this.perlinGroup.arry[this.dotAmount] = new Perlindot(this.stageHeight,this.interval*this.dotAmount,0,speed);
+        this.perlinGroup.arry[this.dotAmount+1] = new Perlindot(this.stageHeight,this.interval*(this.dotAmount+1),0,speed);
         
     }
 
@@ -87,7 +87,7 @@ export class Perlin{
 }
 
 export class Perlindot{
-    constructor(stageHeight,x,gradient){
+    constructor(stageHeight,x,gradient,speed){
         this.stageHeight = stageHeight;
         this.x = x;
         this.offset = Calculate.getRandomArbitrary(-1,1);
@@ -95,7 +95,8 @@ export class Perlindot{
         //this.y = this.stageHeight/2+this.amp*this.offset;
         this.constant = this.stageHeight/2;
         this.gradient = gradient;
-        this.speed = Calculate.getRandomArbitrary(-0.01,0.01);
+        let negspeed = speed*(-1);
+        this.speed = Calculate.getRandomArbitrary(negspeed,speed);
         this.cur = 0;
     }
 
