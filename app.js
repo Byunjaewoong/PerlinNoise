@@ -17,10 +17,18 @@ class App {
         this.mode = 0;
 
         //perlin scale
-        this.scale = 10;
+        this.scale = 5;
 
         //wave speed
         this.speed = 0.03;
+
+        //amp
+        this.amp = this.stageHeight/5;
+
+        //lines
+        this.linecount = 5;
+
+        this.lineArry = [];
 
         window.addEventListener("click", (e) => {
             //mode 변경
@@ -33,15 +41,19 @@ class App {
                 console.log(this.mode);
             }
             */
-            this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
-            this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
-            this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
+            for(let i=0;i<this.linecount;i++)
+            {
+                this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
+            }
+            //this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
+            //this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
+            //this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
         });
 
-        this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
-        this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
-        this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
-
+        for(let i=0;i<this.linecount;i++)
+            {
+                this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
+            }
     }
 
     resize(){
@@ -49,19 +61,23 @@ class App {
         this.stageHeight = document.body.clientHeight;
         this.canvas.width = this.stageWidth * this.pixelRatio;
         this.canvas.height = this.stageHeight * this.pixelRatio;
-        this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
-        this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
-        this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed);
 
-
+        for(let i=0;i<this.linecount;i++)
+            {
+                this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
+            }
     }
 
     animate() {
         window.requestAnimationFrame(this.animate.bind(this));
         this.ctx.clearRect(0,0,this.stageWidth,this.stageHeight);
-        this.perlin.draw1Dperlin();
-        this.perlin2.draw1Dperlin();
-        this.perlin3.draw1Dperlin();
+        //this.perlin.draw1Dperlin();
+        //this.perlin2.draw1Dperlin();
+        //this.perlin3.draw1Dperlin();
+        for(let i=0;i<this.linecount;i++)
+        {
+            this.lineArry[i].draw1Dperlin();
+        }
     }    
 }
 

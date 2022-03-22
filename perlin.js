@@ -1,12 +1,13 @@
 import {Calculate} from "./tool.js"
 
 export class Perlin{
-    constructor(canvas,scale,stageWidth,stageHeight,speed){
+    constructor(canvas,scale,stageWidth,stageHeight,speed,amp){
         this.ctx = canvas.getContext('2d');
         this.scale = scale;
         this.stageWidth = stageWidth;
         this.stageHeight = stageHeight;
         this.perlinGroup = new PerlinGroup;
+        this.amp = amp;
         this.get1DGrid(speed);
         this.getallgroup();
     }
@@ -17,12 +18,12 @@ export class Perlin{
         //console.log(this.scale);
         //console.log(this.interval);
         for(let i=0;i<this.dotAmount;i++){
-            const dot = new Perlindot(this.stageHeight,this.interval*i,0,speed)
+            const dot = new Perlindot(this.stageHeight,this.interval*i,0,speed,this.amp)
             this.perlinGroup.arry[i] = dot;
             //console.log(this.perlinGroup.arry[i]);
         }
-        this.perlinGroup.arry[this.dotAmount] = new Perlindot(this.stageHeight,this.interval*this.dotAmount,0,speed);
-        this.perlinGroup.arry[this.dotAmount+1] = new Perlindot(this.stageHeight,this.interval*(this.dotAmount+1),0,speed);
+        this.perlinGroup.arry[this.dotAmount] = new Perlindot(this.stageHeight,this.interval*this.dotAmount,0,speed,this.amp);
+        this.perlinGroup.arry[this.dotAmount+1] = new Perlindot(this.stageHeight,this.interval*(this.dotAmount+1),0,speed,this.amp);
         
     }
 
@@ -87,11 +88,11 @@ export class Perlin{
 }
 
 export class Perlindot{
-    constructor(stageHeight,x,gradient,speed){
+    constructor(stageHeight,x,gradient,speed,amp){
         this.stageHeight = stageHeight;
         this.x = x;
         this.offset = Calculate.getRandomArbitrary(-1,1);
-        this.amp = this.stageHeight/4;
+        this.amp = amp;
         //this.y = this.stageHeight/2+this.amp*this.offset;
         this.constant = this.stageHeight/2;
         this.gradient = gradient;
