@@ -13,6 +13,9 @@ class App {
 
         window.requestAnimationFrame(this.animate.bind(this));
 
+        //orange
+        //background-color: #df621a;
+
         //mode
         this.mode = 0;
 
@@ -34,18 +37,21 @@ class App {
             //mode 변경
             if(this.mode == 1){
                 this.mode += 1;
+                this.canvas.style.backgroundColor = 'black';
                 console.log(this.mode);
             }
             if(this.mode == 0){
                 this.mode += 1;
+                this.canvas.style.backgroundColor = '#df621a';
                 console.log(this.mode);
             }
             else{
                 this.mode = 0;
+                /*this.canvas.style.backgroundColor = 'black';
                 for(let i=0;i<this.linecount;i++)
                 {
                     this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp,this.mode);
-                }
+                }*/
                 console.log(this.mode);
             }
             

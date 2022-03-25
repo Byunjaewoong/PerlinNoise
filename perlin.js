@@ -13,8 +13,8 @@ export class Perlin{
         this.mode = mode;
         this.color={r:0,g:0,b:0};
         this.color.r = Math.random()*155;
-        this.color.g = Math.random()*155;
-        this.color.b = 155;
+        this.color.g = Math.random()*255;
+        this.color.b = 255;
     }
 
     get1DGrid(speed){
@@ -79,7 +79,9 @@ export class Perlin{
             this.ctx.beginPath();
             this.ctx.moveTo(i, this.height);
             this.ctx.quadraticCurveTo(i+0.5, (this.height+this.perlinGroup.allarry[i+1])/2, i+1, this.perlinGroup.allarry[i+1]);
-            this.ctx.stroke();
+            if(this.mode == 0){
+                this.ctx.stroke();
+            }
             if(this.mode == 1){
                 this.ctx.lineTo(i+1,this.stageHeight);
                 this.ctx.lineTo(i,this.stageHeight);
