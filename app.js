@@ -23,7 +23,7 @@ class App {
         this.speed = 0.03;
 
         //amp
-        this.amp = this.stageHeight/5;
+        this.amp = this.stageHeight/3;
 
         //lines
         this.linecount = 5;
@@ -32,19 +32,24 @@ class App {
 
         window.addEventListener("click", (e) => {
             //mode 변경
-            /*if(this.mode == 0){
+            if(this.mode == 1){
+                this.mode += 1;
+                console.log(this.mode);
+            }
+            if(this.mode == 0){
                 this.mode += 1;
                 console.log(this.mode);
             }
             else{
                 this.mode = 0;
+                for(let i=0;i<this.linecount;i++)
+                {
+                    this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp,this.mode);
+                }
                 console.log(this.mode);
             }
-            */
-            for(let i=0;i<this.linecount;i++)
-            {
-                this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
-            }
+            
+            
             //this.perlin = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
             //this.perlin2 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
             //this.perlin3 = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
@@ -52,7 +57,7 @@ class App {
 
         for(let i=0;i<this.linecount;i++)
             {
-                this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
+                this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp,this.mode);
             }
     }
 
@@ -64,7 +69,7 @@ class App {
 
         for(let i=0;i<this.linecount;i++)
             {
-                this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp);
+                this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp,this.mode);
             }
     }
 
@@ -76,7 +81,7 @@ class App {
         //this.perlin3.draw1Dperlin();
         for(let i=0;i<this.linecount;i++)
         {
-            this.lineArry[i].draw1Dperlin();
+            this.lineArry[i].draw1Dperlin(this.mode);
         }
     }    
 }

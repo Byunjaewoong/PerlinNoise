@@ -1,7 +1,7 @@
 import {Calculate} from "./tool.js"
 
 export class Perlin{
-    constructor(canvas,scale,stageWidth,stageHeight,speed,amp){
+    constructor(canvas,scale,stageWidth,stageHeight,speed,amp,mode){
         this.ctx = canvas.getContext('2d');
         this.scale = scale;
         this.stageWidth = stageWidth;
@@ -10,6 +10,11 @@ export class Perlin{
         this.amp = amp;
         this.get1DGrid(speed);
         this.getallgroup();
+        this.mode = mode;
+        this.color={r:0,g:0,b:0};
+        this.color.r = Math.random()*255;
+        this.color.g = Math.random()*255;
+        this.color.b = Math.random()*255;
     }
 
     get1DGrid(speed){
@@ -55,27 +60,31 @@ export class Perlin{
         }
     }
 
-    draw1Dperlin(){
+    draw1Dperlin(mode){
+        this.mode = mode;
+        console.log(this.mode);
         for(let i=0;i<this.perlinGroup.arry.length;i++){
             this.perlinGroup.arry[i].update();
         }
         this.getallgroup();
 
-
+        this.ctx.lineWidth = this.stageHeight/this.height;
+        this.ctx.linecap = 'round';
+        this.ctx.linejoin = 'round';
+        this.ctx.mitterLimit = 5;
+        this.ctx.strokeStyle = "rgba(255,255,255,1)";
+        this.ctx.fillStyle = "rgba("+this.color.r+","+this.color.g+","+this.color.b+",0.4)";
         for(let i=0;i<this.stageWidth;i++){
             this.height = this.perlinGroup.allarry[i];
-            //this.height = this.stageHeight/2;
-            //if(j>=2&&j<=3){
-            //    console.log(this.height+"    "+i);
-            //}
-            //this.ctx.fillStyle = "rgba(255,255,255,1)";
-            //this.ctx.lineWidth = 4;
-            this.ctx.lineWidth = this.stageHeight/this.height;
-            this.ctx.strokeStyle = "rgba(255,255,255,1)";
             this.ctx.beginPath();
             this.ctx.moveTo(i, this.height);
             this.ctx.quadraticCurveTo(i+0.5, (this.height+this.perlinGroup.allarry[i+1])/2, i+1, this.perlinGroup.allarry[i+1]);
             this.ctx.stroke();
+            if(this.mode == 1){
+                this.ctx.lineTo(i+1,this.stageHeight);
+                this.ctx.lineTo(i,this.stageHeight);
+                this.ctx.fill();
+            };
             /*this.ctx.beginPath();
             this.ctx.arc(
                 i, //* ratio_w,
