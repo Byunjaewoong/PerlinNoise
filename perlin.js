@@ -68,7 +68,7 @@ export class Perlin{
         }
         this.getallgroup();
 
-        this.ctx.lineWidth = this.stageHeight/this.height;
+        this.ctx.lineWidth = 1;
         this.ctx.linecap = 'round';
         this.ctx.linejoin = 'round';
         this.ctx.mitterLimit = 5;

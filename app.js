@@ -23,7 +23,7 @@ class App {
         this.speed = 0.03;
 
         //amp
-        this.amp = this.stageHeight/3;
+        this.amp = this.stageHeight/5;
 
         //lines
         this.linecount = 5;
