@@ -12,9 +12,9 @@ export class Perlin{
         this.getallgroup();
         this.mode = mode;
         this.color={r:0,g:0,b:0};
-        this.color.r = Math.random()*155;
+        this.color.r = Math.random()*255;
         this.color.g = Math.random()*255;
-        this.color.b = 255;
+        this.color.b = Math.random()*255;
     }
 
     get1DGrid(speed){
