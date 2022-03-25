@@ -69,7 +69,8 @@ export class Perlin{
             //    console.log(this.height+"    "+i);
             //}
             //this.ctx.fillStyle = "rgba(255,255,255,1)";
-            this.ctx.lineWidth = 4;
+            //this.ctx.lineWidth = 4;
+            this.ctx.lineWidth = this.stageHeight/this.height;
             this.ctx.strokeStyle = "rgba(255,255,255,1)";
             this.ctx.beginPath();
             this.ctx.moveTo(i, this.height);
