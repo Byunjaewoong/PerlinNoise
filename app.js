@@ -11,7 +11,7 @@ class App {
         //orange
         //background-color: #df621a;
         //resolution
-        this.resolution = 10;
+        this.resolution = 3;
 
         //mode
         this.mode = 0;
