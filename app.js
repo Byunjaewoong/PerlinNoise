@@ -18,8 +18,11 @@ class App {
         this.scale = 5;
 
         //wave speed
-        this.speed = 0.03;
-
+        this.speed = 0.02;
+        
+        //ColortransSpeed
+        this.colorTransSpeed = 0.5;
+        
         //amp
         //this.amp = this.stageHeight/4;
 
@@ -57,7 +60,6 @@ class App {
                                 b:(255-this.lineArry[this.linecount-1].color.b)/3,
                                 };
                 this.canvas.style.backgroundColor = "rgba("+negColor.r+","+negColor.g+","+negColor.b+",0.6)";
-                console.log(this.mode);
             }
             else{
                 this.mode = 0;
@@ -77,7 +79,7 @@ class App {
 
         for(let i=0;i<this.linecount;i++)
             {
-            this.amp = this.stageHeight/4*Calculate.getRandomArbitrary(0.5,1);;
+            this.amp = this.stageHeight/3*Calculate.getRandomArbitrary(0.7,1);;
             this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp,this.mode);
             }
     }
@@ -89,6 +91,7 @@ class App {
         this.canvas.height = this.stageHeight * this.pixelRatio;
         for(let i=0;i<this.linecount;i++)
             {
+                this.amp = this.stageHeight/3*Calculate.getRandomArbitrary(0.7,1);;
                 this.lineArry[i] = new Perlin(this.canvas,this.scale,this.stageWidth,this.stageHeight,this.speed,this.amp,this.mode);
             }
         if(this.mode==1)
@@ -108,9 +111,27 @@ class App {
         //this.perlin.draw1Dperlin();
         //this.perlin2.draw1Dperlin();
         //this.perlin3.draw1Dperlin();
+        
         for(let i=0;i<this.linecount;i++)
         {
+            if(this.mode==1){
+                this.lineArry[i].transColor(this.colorTransSpeed);
+            }
             this.lineArry[i].draw1Dperlin(this.mode);
+        }
+        /*
+        for(let i=0;i<this.linecount;i++){
+            this.lineArry[i].draw1Dperlin(0);
+        }*/
+
+        if(this.mode==1)
+        {    
+            let negColor = {
+                r:(255-this.lineArry[this.linecount-1].color.r)/3,
+                g:(255-this.lineArry[this.linecount-1].color.g)/3,
+                b:(255-this.lineArry[this.linecount-1].color.b)/3,
+                };
+            this.canvas.style.backgroundColor = "rgba("+negColor.r+","+negColor.g+","+negColor.b+",0.6)";
         }
     }    
 }

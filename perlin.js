@@ -15,6 +15,29 @@ export class Perlin{
         this.color.r = Math.random()*255;
         this.color.g = Math.random()*255;
         this.color.b = Math.random()*255;
+        this.directionColor();
+    }
+
+    directionColor(){
+        this.vectorColor = {r:0,g:0,b:0};
+        this.vectorColor.r = Calculate.getRandomArbitrary(-1,1);
+        this.vectorColor.g = Calculate.getRandomArbitrary(-1,1);
+        this.vectorColor.b = Calculate.getRandomArbitrary(-1,1);
+    }
+
+    transColor(transSpeed){
+        if(this.color.r > 255||this.color.r < 0){
+            this.vectorColor.r = this.vectorColor.r*(-1);
+        }
+        if(this.color.g > 255||this.color.g < 0){
+            this.vectorColor.g = this.vectorColor.g*(-1);
+        }
+        if(this.color.b > 255||this.color.b < 0){
+            this.vectorColor.b = this.vectorColor.b*(-1);
+        }
+        this.color.r = this.color.r + this.vectorColor.r*transSpeed;
+        this.color.g = this.color.g + this.vectorColor.g*transSpeed;
+        this.color.b = this.color.b + this.vectorColor.b*transSpeed;        
     }
 
     get1DGrid(speed){
@@ -62,7 +85,7 @@ export class Perlin{
 
     draw1Dperlin(mode){
         this.mode = mode;
-        console.log(this.mode);
+        //console.log(this.mode);
         for(let i=0;i<this.perlinGroup.arry.length;i++){
             this.perlinGroup.arry[i].update();
         }
@@ -74,16 +97,16 @@ export class Perlin{
         this.ctx.mitterLimit = 5;
         this.ctx.strokeStyle = "rgba(255,255,255,1)";
         this.ctx.fillStyle = "rgba("+this.color.r+","+this.color.g+","+this.color.b+",0.4)";
-        for(let i=0;i<this.stageWidth;i++){
+        for(let i=0;i<this.stageWidth;i+=10){
             this.height = this.perlinGroup.allarry[i];
             this.ctx.beginPath();
             this.ctx.moveTo(i, this.height);
-            this.ctx.quadraticCurveTo(i+0.5, (this.height+this.perlinGroup.allarry[i+1])/2, i+1, this.perlinGroup.allarry[i+1]);
+            this.ctx.quadraticCurveTo(i+5, (this.height+this.perlinGroup.allarry[i+10])/2, i+10, this.perlinGroup.allarry[i+10]);
             if(this.mode == 0){
                 this.ctx.stroke();
             }
             if(this.mode == 1){
-                this.ctx.lineTo(i+1,this.stageHeight);
+                this.ctx.lineTo(i+10,this.stageHeight);
                 this.ctx.lineTo(i,this.stageHeight);
                 this.ctx.fill();
             };
@@ -125,3 +148,5 @@ export class PerlinGroup{
         this.allarry = [];
     }
 }
+
+
